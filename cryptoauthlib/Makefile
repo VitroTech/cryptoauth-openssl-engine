@@ -129,7 +129,7 @@ $(OUTDIR)/libateccssl.so: $(LIBATECCSSL_OBJECTS) $(LIBCRYPTOAUTH_OBJECTS) | $(OU
 	$(LD) -dll -shared $(LIBATECCSSL_OBJECTS) $(LIBCRYPTOAUTH_OBJECTS) -o $@ -lcrypto -lrt
 
 $(OUTDIR)/test: $(OUTDIR)/libateccssl.so $(TEST_OBJECTS) | $(OUTDIR)
-	$(CC) -o $@ $(TEST_OBJECTS) -L$(OUTDIR) -lateccssl -lcrypto -lssl
+	$(CC) -o $@ $(TEST_OBJECTS) $(CLFAGS) -L$(OUTDIR) -lateccssl -lcrypto -lssl
 	
 include $(wildcard $(patsubst %,$(OUTDIR)/%.d,$(basename $(SOURCES))))
 
