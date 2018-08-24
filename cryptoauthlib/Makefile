@@ -126,7 +126,7 @@ $(OUTDIR)/libcryptoauth.a: $(LIBCRYPTOAUTH_OBJECTS) | $(OUTDIR)
 	$(AR) $(ARFLAGS) $@ $(LIBCRYPTOAUTH_OBJECTS)
 
 $(OUTDIR)/libateccssl.so: $(LIBATECCSSL_OBJECTS) $(LIBCRYPTOAUTH_OBJECTS) | $(OUTDIR)
-	$(LD) -dll -shared $(LIBATECCSSL_OBJECTS) $(LIBCRYPTOAUTH_OBJECTS) -o $@ -lcrypto -lrt
+	$(LD) -dll -shared $(LDFLAGS) $(LIBATECCSSL_OBJECTS) $(LIBCRYPTOAUTH_OBJECTS) -o $@ -lcrypto -lrt
 
 $(OUTDIR)/test: $(OUTDIR)/libateccssl.so $(TEST_OBJECTS) | $(OUTDIR)
 	$(CC) -o $@ $(TEST_OBJECTS) $(CLFAGS) -L$(OUTDIR) -lateccssl -lcrypto -lssl
